@@ -1,2 +1,52 @@
-/* DContent Styles v1.0 | fred@atissoftware.com */
-.dcontent-element{display:inline-block;width:100%;height:auto;border:solid 1px #999;position:relative;min-height:50px}.dcontent-element .dcontent-controls{display:inline-block;position:absolute;bottom:0;left:0;border-radius:0 8px 0 0;background:#fff;box-shadow:0 0 5px #ccc;padding:5px}.dcontent-element .dcontent-controls a.text{background-position:-16px -48px}.dcontent-element .dcontent-controls a.table{background-position:0 -48px}.dcontent-element .element-container{border:solid 1px #eee;background:#f6f6f6;clear:both;position:relative;overflow:hidden;margin:5px 1px;padding:20px 0}.dcontent-element .element-container:before{background:rgba(0,0,0,0.10);color:#000;position:absolute;top:0;left:0;font-size:8px;font-family:Arial,Helvetica,sans-serif;letter-spacing:2px;padding:0 2px}.dcontent-element .textcontainer{min-height:130px}.dcontent-element .textcontainer:before{content:'TEXT'}.dcontent-element .listcontainer:before{content:'LIST'}.dcontent-element .listcontainer ul,.listcontainer ol{clear:both;margin:0;padding:0 0 0 20px}.dcontent-element .listcontainer ul > li,.listcontainer ol > li{clear:both;position:relative;padding:3px 0}.dcontent-element .listcontainer ul > li{list-style-type:disc}.dcontent-element .listcontainer ol > li{list-style-type:decimal}.dcontent-element .listcontainer ul li input,.listcontainer ol li input{border:solid 1px #ccc!important;float:left!important;width:200px!important;font-family:Verdana,Arial,Helvetica,sans-serif!important;font-size:10px!important;margin:0 0 5px!important;padding:3px 0!important}.dcontent-element .list-control.add-item-list{background-position:0 0}.dcontent-element .list-control.to-num-list{background-position:-16px -32px}.dcontent-element .list-control.add-sub-item-list{background-position:0 -16px}.dcontent-element .list-control.add-sub-item-list.remove{display:none;background-position:-16px -16px}.dcontent-element .tablecontainer{padding-left:5px;padding-right:5px}.dcontent-element .tablecontainer:before{content:'TABLE'}.dcontent-element .tablecontainer table{width:100%}.dcontent-element .tablecontainer td{border:dotted 1px #999;min-height:30px;position:relative;width:auto;min-width:30%}.dcontent-element .tablecontainer td input{border:none!important;display:inline-block!important;width:100%!important;height:100%!important;min-height:30px!important;font-family:Verdana,Arial,Helvetica,sans-serif!important;font-size:10px!important;margin:0!important;padding:0!important}.dcontent-element .tablecontainer table tr td:last-child{border:none;width:35px!important;text-align:center;white-space:nowrap}.dcontent-element .tablecontainer table tr:last-child td{border:none;vertical-align:top}.dcontent-element .table-control.add-row-table{background-position:-16px -64px}.dcontent-element .table-control.remove-row-table{background-position:-16px -80px}.dcontent-element .table-control.add-column-table{background-position:0 -64px}.dcontent-element .table-control.remove-column-table{background-position:0 -80px}.dcontent-element .dcontent-controls a,.dcontent-element .list-control{display:block;width:16px;height:16px;float:left;background:url(images/icons-sprite.png) no-repeat 0 0;overflow:hidden;font-size:0;text-indent:-5000px;margin:0 1px}.dcontent-element .dcontent-controls a.list,.dcontent-element .list-control.to-bul-list{background-position:0 -32px}.dcontent-element .textcontainer .text-controls,.dcontent-element .listcontainer .list-controls,.dcontent-element .tablecontainer .table-controls{display:inline-block;position:absolute;bottom:0;right:0;border-radius:8px 0 0 0;background:#fff;box-shadow:0 0 5px #ccc;padding:5px}.dcontent-element .text-control,.dcontent-element .table-control{display:block;width:16px;height:16px;background:url(images/icons-sprite.png) no-repeat 0 0;overflow:hidden;font-size:0;text-indent:-5000px}.dcontent-element .text-control.remove-text,.dcontent-element .list-control.remove-list,.dcontent-element .list-control.remove-item-list,.dcontent-element .table-control.remove-table{background-position:-16px 0}.dcontent-element .listcontainer ul li:first-child > .remove-item-list,.listcontainer ol li:first-child > .remove-item-list,.dcontent-element .tablecontainer table tr:first-child td:last-child .remove-row-table,.dcontent-element .tablecontainer table tr:last-child td:first-child .remove-column-table{display:none}
+.dcontent-element{display:inline-block;width:100%;height:auto;border:solid 1px #999;position:relative;min-height:50px}
+.dcontent-element .dcontent-controls{display:inline-block;position:absolute;bottom:0;left:0;padding:5px;border-radius:0 8px 0 0;background:#fff;box-shadow:0 0 5px #ccc}
+.dcontent-element .dcontent-controls a{display:block;width:16px;height:16px;margin:0 1px;float:left;background:url(images/icons-sprite.png) no-repeat 0 0;overflow:hidden;font-size:0;text-indent:-5000px}
+.dcontent-element .dcontent-controls a.text{background-position:-16px -48px}
+.dcontent-element .dcontent-controls a.table{background-position:0 -48px}
+.dcontent-element .dcontent-controls a.list{background-position:0 -32px}
+.dcontent-element .element-container{border:solid 1px #eee;background:#f6f6f6;padding:20px 0 20px;margin:5px 1px;clear:both;position:relative;overflow:hidden}
+.dcontent-element .element-container:before{background:rgba(0,0,0,0.10);color:#000;position:absolute;top:0;left:0;padding:0 2px;font-size:8px;font-family:Arial,Helvetica,sans-serif;letter-spacing:2px}
+.dcontent-element .textcontainer{min-height:130px}
+.dcontent-element .textcontainer:before{content:'TEXT'}
+.dcontent-element .textcontainer .text-controls{display:inline-block;position:absolute;bottom:0;right:0;padding:5px;border-radius:8px 0 0 0;background:#fff;box-shadow:0 0 5px #ccc}
+.dcontent-element .text-control{display:block;width:16px;height:16px;background:url(images/icons-sprite.png) no-repeat 0 0;overflow:hidden;font-size:0;text-indent:-5000px}
+.dcontent-element .text-control.remove-text{background-position:-16px 0}
+.dcontent-element .listcontainer .mceExternalToolbar{top:28px!important;z-index:100!important}
+.dcontent-element .listcontainer .mceContentBody{white-space:nowrap}
+.dcontent-element .listcontainer:before{content:'LIST'}
+.dcontent-element .listcontainer ul,.dcontent-element .listcontainer ol{clear:both;padding:0 0 0 20px;margin:0;font-size:12px}
+.dcontent-element .listcontainer ul>li,.listcontainer ol>li{padding:3px 0;clear:both;position:relative;height:24px;line-height:24px}
+.dcontent-element .listcontainer ul>li{list-style-type:disc}
+.dcontent-element .listcontainer ol>li{list-style-type:decimal}
+.dcontent-element .listcontainer ul li:first-child>.remove-item-list,.dcontent-element .listcontainer ol li:first-child>.remove-item-list{display:none}
+.dcontent-element .listcontainer ul li input,.listcontainer ol li input{margin:0 0 5px!important;padding:3px 0!important;border:solid 1px #ccc!important;float:left!important;width:200px!important;font-family:Verdana,Arial,Helvetica,sans-serif!important;font-size:10px!important}
+.dcontent-element .listcontainer ul li .mceEditor{position:absolute;left:0;top:0}
+.dcontent-element .listcontainer ul li>.list-control,.dcontent-element .listcontainer>ol li .list-control{position:absolute;top:5px}
+.dcontent-element .listcontainer ul li>.list-control.remove-item-list,.dcontent-element .listcontainer>ol li .list-control.remove-item-list{left:205px}
+.dcontent-element .listcontainer ul li>.list-control.add-sub-item-list,.dcontent-element .listcontainer>ol li .list-control.add-sub-item-list{left:222px}
+.dcontent-element .listcontainer ul li:first-child>.list-control.add-sub-item-list,.dcontent-element .listcontainer>ol li:first-child .list-control.add-sub-item-list{left:205px}
+.dcontent-element .listcontainer .list-controls{display:inline-block;position:absolute;bottom:0;right:0;padding:5px;border-radius:8px 0 0 0;background:#fff;box-shadow:0 0 5px #ccc}
+.dcontent-element .list-control{display:block;width:16px;height:16px;margin:0 1px;float:left;background:url(images/icons-sprite.png) no-repeat 0 0;overflow:hidden;font-size:0;text-indent:-5000px}
+.dcontent-element .list-control.add-item-list{background-position:0 0}
+.dcontent-element .list-control.remove-list{background-position:-16px 0}
+.dcontent-element .list-control.to-num-list{background-position:-16px -32px}
+.dcontent-element .list-control.to-bul-list{background-position:0 -32px}
+.dcontent-element .list-control.remove-item-list{background-position:-16px 0}
+.dcontent-element .list-control.add-sub-item-list{background-position:0 -16px}
+.dcontent-element .list-control.add-sub-item-list.remove{display:none;background-position:-16px -16px}
+.dcontent-element .tablecontainer{padding-left:5px;padding-right:5px}
+.dcontent-element .tablecontainer:before{content:'TABLE'}
+.dcontent-element .tablecontainer table{width:100%}
+.dcontent-element .tablecontainer td{border:dotted 1px #999;min-height:30px;position:relative;width:auto;min-width:30%}
+.dcontent-element .tablecontainer td input{border:none!important;padding:0!important;margin:0!important;display:inline-block!important;width:100%!important;height:100%!important;min-height:30px!important;font-family:Verdana,Arial,Helvetica,sans-serif!important;font-size:10px!important}
+.dcontent-element .tablecontainer table tr td:last-child{border:0;width:35px!important;text-align:center;white-space:nowrap}
+.dcontent-element .tablecontainer table tr:last-child td{border:0;vertical-align:top}
+.dcontent-element .tablecontainer table tr:first-child td:last-child .remove-row-table{display:none}
+.dcontent-element .tablecontainer table tr:last-child td:first-child .remove-column-table{display:none}
+.dcontent-element .tablecontainer .table-controls{display:inline-block;position:absolute;bottom:0;right:0;padding:5px;border-radius:8px 0 0 0;background:#fff;box-shadow:0 0 5px #ccc}
+.dcontent-element .table-control{display:block;width:16px;height:16px;background:url(images/icons-sprite.png) no-repeat 0 0;overflow:hidden;font-size:0;text-indent:-5000px}
+.dcontent-element .table-control.remove-table{background-position:-16px 0}
+.dcontent-element .table-control.add-row-table{background-position:-16px -64px}
+.dcontent-element .table-control.remove-row-table{background-position:-16px -80px}
+.dcontent-element .table-control.add-column-table{background-position:0 -64px}
+.dcontent-element .table-control.remove-column-table{background-position:0 -80px}
