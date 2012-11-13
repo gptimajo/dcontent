@@ -21,11 +21,11 @@
 .dcontent-element .listcontainer .mceExternalToolbar { top:28px !important; z-index:100 !important; }
 .dcontent-element .listcontainer .mceContentBody  { white-space:nowrap; }
 .dcontent-element .listcontainer:before { content:'LIST'; }
-.dcontent-element .listcontainer ul, .listcontainer ol { clear:both; padding:0 0 0 20px; margin:0; }
-.dcontent-element .listcontainer ul > li, .listcontainer ol > li  { padding:3px 0; clear:both; position:relative; }
+.dcontent-element .listcontainer ul, .dcontent-element .listcontainer ol { clear:both; padding:0 0 0 20px; margin:0; font-size:12px; }
+.dcontent-element .listcontainer ul > li, .listcontainer ol > li  { padding:3px 0; clear:both; position:relative; height:24px; line-height:24px; }
 .dcontent-element .listcontainer ul > li { list-style-type:disc; }
-.dcontent-element .listcontainer ol > li { list-style-type:decimal; }
-.dcontent-element .listcontainer ul li:first-child > .remove-item-list, .listcontainer ol li:first-child > .remove-item-list { display:none; }
+.dcontent-element .listcontainer ol > li { list-style-type:decimal;}
+.dcontent-element .listcontainer ul li:first-child > .remove-item-list, .dcontent-element .listcontainer ol li:first-child > .remove-item-list { display:none; }
 .dcontent-element .listcontainer ul li input, .listcontainer ol li input { margin:0 0 5px !important; padding:3px 0 !important; border:solid 1px #ccc !important; float:left !important; width:200px !important; font-family:Verdana,Arial,Helvetica,sans-serif !important; font-size:10px !important; }
 
 .dcontent-element .listcontainer ul li .mceEditor { position:absolute; left:0; top:0; }

@@ -163,7 +163,7 @@ if(jQuery){
 					height : 32,
 					theme_advanced_resizing_min_height : 32,
 					theme : "advanced",
-					theme_advanced_buttons1 : "bold,italic,underline,link",
+					theme_advanced_buttons1 : "bold,italic,|,link",
 					theme_advanced_buttons2 : "",
 					theme_advanced_buttons3 : "",
 					theme_advanced_buttons4 : "",
@@ -193,7 +193,7 @@ if(jQuery){
 							  
 							  return tinymce.dom.Event.cancel(e);
 							}
-						});
+						});/*
 						
 						ed.onChange.add(function(ed){
 							ed.save();
@@ -208,7 +208,7 @@ if(jQuery){
 						ed.onSaveContent.add(function(ed,o){
 							o.content = o.content.replace(/<p[^>]*>/,'');
 							o.content = o.content.replace(/<\/p>/,'');
-						});
+						});*/
 					},
 					init_instance_callback : function( ed ){
 					  // Work around for TinyMCE's hardcoded min-height
@@ -244,9 +244,9 @@ if(jQuery){
 									 html = ul.children().clone(true,true);
                                  
                                  var ol = jQuery('<ol>');
-                                     ol.append(html)  
+                                     ol.append(html);
 									 ol.find('.mceEditor').remove();
-									 ol.find('input[type=text]').attr('id','');
+									 ol.find('input[type=text]').removeAttr('id').removeAttr('aria-hidden').removeAttr('style');
 
                                  ul.replaceWith(ol);
 							 }
@@ -258,7 +258,7 @@ if(jQuery){
                                  var ul = jQuery('<ul>');
                                      ul.append(html)
 									 ul.find('.mceEditor').remove();
-									 ul.find('input[type=text]').attr('id','');
+									 ul.find('input[type=text]').removeAttr('id').removeAttr('aria-hidden').removeAttr('style');
 								 
 								 ol.replaceWith(ul);
 							 }
@@ -271,8 +271,6 @@ if(jQuery){
 						var target = jQuery(e.currentTarget),
 							item = jQuery(actions.list._item);
 						target.parent().siblings('ul,ol').append(item);	
-						
-						//item.find(' > input[type=hidden]').tinymce(actions.list._tinymce_settings);
 											
 						actions.list._apply();
 					},
@@ -321,8 +319,9 @@ if(jQuery){
 					
 					if(list){
 						list.find('> li').each(function(liIdx,LI){
-							var text = LI.firstChild?LI.firstChild.nodeValue:''; 
-							
+							var text = htmlEncode(jQuery(LI).html());
+								text = addSlashes(text);
+								
                             var listitem = actions.list._item;
                                 listitem = listitem.replace(/input/,('input value="'+text+'"'));
 							var newLI = jQuery(listitem);
@@ -331,15 +330,15 @@ if(jQuery){
 							if(text)
 								jQuery(LI.firstChild).replaceWith(newLI.html());
 							else
-								jQuery(LI).append(newLI.html());
+								jQuery(LI).append(newLI.html());/*
 							var sublist = jQuery(LI).find('> div').filter(function() {
 								return this.id.match(/^dc\-lst/);
 							});
-							if(sublist.size()){							
+							if(sublist.size()){
 								var newsublist = actions.list._set(sublist,true);								
 								sublist.replaceWith(newsublist);
 								actions.list._apply();
-							}
+							}*/
 						});
 						
 						jQuery(list).prependTo(listcontainer);
@@ -358,7 +357,7 @@ if(jQuery){
 						var action = camelize(cls[1]);
 						dc[action](event);
 						return false;
-					});
+					});/*
 					jQuery('.listcontainer input[type=text]')
 						.unbind('change')
 						.bind('change',function(){
@@ -366,23 +365,38 @@ if(jQuery){
 								dc = $this.parents('.dcontent-element').data('dcontent');
 								
 							dc.update($this);
-						});/*
-					jQuery('.listcontainer input[type=hidden]').each(function(idx,elem){
+						});*/
+					jQuery('.listcontainer input[type=text]').each(function(idx,elem){
 						var $this = jQuery(elem);
 						
 						if(!/^mce_/.test($this.attr('id'))){
 							$this.tinymce(actions.list._tinymce_settings);
-							$this.next().css('display','inline');
-							
+							//$this.next().css('display','inline');
+							/*							
 							setTimeout(function(){ 
-								//if(tinymce) tinymce.execCommand('mceFocus',false,$this.attr('id'));
-							},100);
+								if(tinymce) tinymce.execCommand('mceFocus',false,$this.attr('id'));
+							},100);*/
 						}
-					});*/
+					});
 
 				},
 				_get : function(element){
-					var elementContainer = jQuery(element).clone(true,true);
+					var source = jQuery(element),
+						result = jQuery('<div>').attr('id',source.attr('id').replace(/\-element$/,''));
+						
+					var listcont = source.children().prop('tagName').toLowerCase();
+						listcont = jQuery('<'+ listcont +'>');
+					
+					source.find('li > input[type=text]').each(function(d,element){
+						var $element = jQuery(element); console.log($element.val());
+						jQuery('<li>').html($element.val()).appendTo(listcont);
+					});
+					listcont.appendTo(result);
+					
+					var res = jQuery('<div>').append(result);
+					return res.html();
+					
+					//var elementContainer = jQuery(element).clone(true,true);
 					
 					// remove tinymce editor
 					//elementContainer.find('.mceEditor').remove();
@@ -391,7 +405,7 @@ if(jQuery){
 					elementContainer.find('ul > li > input[type=text], ol > li > input[type=text]').each(function(idx,element){
 						var text = jQuery(element).val();
 						jQuery(element).parent().prepend(text);
-						jQuery(element).siblings('.list-control').remove();
+						jQuery(element).siblings('.list-control, .mceEditor').remove();
 						jQuery(element).remove();
 					});
 					// remove list controls
@@ -618,6 +632,21 @@ if(jQuery){
 				}
 			}
 		}
+		
+		function addSlashes(value){
+			value = value.replace(/[\']+/img,"\\'");
+			value = value.replace(/[\"]+/img,'&quot;');
+			return value;
+		}
+		
+		function htmlEncode(value){
+			return (value)?jQuery('<div />').text(value).html():'';
+		}
+		
+		function htmlDecode(value) {
+			return (value)?$('<div />').html(value).text():'';
+		}
+
 		
 		function targetDataToFragment(target){
 			target = target?target:self.target;
