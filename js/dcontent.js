@@ -446,6 +446,72 @@ if(jQuery){
 				_columncontrols : '<a href="#" class="table-control remove-column-table" title="Remove Current Column">Remove Column</a><a href="#" class="table-control add-column-table" title="Add Column to the Right">Add Column</a>',
 				_rowcontrols : '<a href="#" class="table-control remove-row-table" title="Delete Current Row">Delete Row</a><a href="#" class="table-control add-row-table" title="Add Row Below">Add Row</a>',
 				_field : '<td><input type="text" /></td>',
+				_tinymce_settings : {
+					content_css : 'css/dcontent.tinymce.css',
+					script_url : configuration.get('tinymce_path'),
+					width : 65,
+					height : 30,
+					theme_advanced_resizing_min_height : 32,
+					theme : "advanced",
+					theme_advanced_buttons1 : "bold,italic,|,link",
+					theme_advanced_buttons2 : "",
+					theme_advanced_buttons3 : "",
+					theme_advanced_buttons4 : "",
+					theme_advanced_toolbar_align : 'bottom',
+					theme_advanced_toolbar_location : 'external',
+					theme_advanced_statusbar_location  : 'none',
+					theme_advanced_source_editor_wrap : false,
+					valid_elements : 'a[href|target=_blank],strong/b,em/i,u',
+					plugins : "paste,autosave",
+					force_br_newlines : false,
+					force_p_newlines  : false,
+					force_root_block  : false,
+					paste_text_sticky : true,
+					setup : function(ed) {
+						ed.onInit.add(function(ed) {
+							ed.pasteAsPlainText = true;
+							jQuery(ed.getContainer())
+								.mouseleave(function(){
+									jQuery(ed.getContainer()).find('.mceExternalToolbar').css('display','none');
+								})
+								.mouseenter(function(){
+									jQuery(ed.getContainer()).find('.mceExternalToolbar').css('display','block');
+								});
+						});
+						
+						ed.onKeyDown.addToTop(function(ed, e) {
+							if ((e.charCode == 13 || e.keyCode == 13)) {
+							  var element = jQuery(ed.getElement());
+							  
+							  var elementContainer = element.parents('.element-container');
+							  	  elementContainer.find('.list-controls .list-control.add-item-list').trigger('click');
+								  
+  							 ed.save();
+							  
+							  return tinymce.dom.Event.cancel(e);
+							}
+						});/*
+						
+						ed.onChange.add(function(ed){
+							ed.save();
+							setTimeout(function(){
+								var $this = jQuery(ed.getElement()),
+									dc = $this.parents('.dcontent-element').data('dcontent');
+									
+								dc.update($this);
+							});
+						});
+						
+						ed.onSaveContent.add(function(ed,o){
+							o.content = o.content.replace(/<p[^>]*>/,'');
+							o.content = o.content.replace(/<\/p>/,'');
+						});*/
+					},
+					init_instance_callback : function( ed ){
+					  // Work around for TinyMCE's hardcoded min-height
+						$('#'+ed.editorContainer).find('td.mceIframeContainer iframe, table.mceLayout').height(32);
+					}
+				},
 				add : function(e){
 					var tablecontainer = actions.table._create();
 					var target = jQuery(e[0].currentTarget);
@@ -489,13 +555,21 @@ if(jQuery){
 						var a = jQuery(e.currentTarget);
 						var td = a.parent(), tr = td.parent();
 						var tdIdx = td.prevAll().size();
-						var indexedTD = tr.siblings().find('td:eq('+tdIdx+')');
+						var indexedTD = tr.siblings().find('> td:eq('+tdIdx+')');
+						
 						jQuery(actions.table._field).insertAfter(indexedTD);
 						
 						// insert controls column
 						jQuery('<td>'+ actions.table._columncontrols +'</td>').insertAfter(td);
 						
 						actions.table._apply();
+						/*
+						var i=0;
+						while(tinymce.editors[i]){
+							var ed = tinymce.editors[i];
+							i++;
+						}
+						*/
 					},
 					remove : function(e){
 						if(confirm('Delete Column?')){
@@ -538,12 +612,18 @@ if(jQuery){
 							jQuery('<td>'+ actions.table._columncontrols +'</td>').appendTo(TR);
 						}
 						jQuery('<td>&nbsp;</td>').appendTo(TR);
-						table.append(TR);
+
+						var TDs = table.find('tr:first > td').size() - 1;
+						var i=0, colCtrlsTR = jQuery('<tr>');
+						while(i++<TDs){
+							jQuery('<td>').html(actions.table._columncontrols).appendTo(colCtrlsTR);
+						}
+						colCtrlsTR.appendTo(table);
 						
-						table.prependTo(tablecontainer);
+						jQuery('<div>').append(table).prependTo(tablecontainer);
 					}
 					else
-						jQuery('<table><tr><td><input type="text" /></td><td><input type="text" /></td><td><input type="text" /></td><td>'+ actions.table._rowcontrols +'</td></tr><tr><td><input type="text" /></td><td><input type="text" /></td><td><input type="text" /></td><td>'+ actions.table._rowcontrols +'</td></tr><tr><td>'+ actions.table._columncontrols +'</td><td>'+ actions.table._columncontrols +'</td><td>'+ actions.table._columncontrols +'</td></tr></table>').prependTo(tablecontainer);
+						jQuery('<div><table><tr><td><input type="text" /></td><td><input type="text" /></td><td><input type="text" /></td><td>'+ actions.table._rowcontrols +'</td></tr><tr><td><input type="text" /></td><td><input type="text" /></td><td><input type="text" /></td><td>'+ actions.table._rowcontrols +'</td></tr><tr><td>'+ actions.table._columncontrols +'</td><td>'+ actions.table._columncontrols +'</td><td>'+ actions.table._columncontrols +'</td></tr></table></div>').prependTo(tablecontainer);
 					
 					return tablecontainer;
 				},
@@ -557,20 +637,21 @@ if(jQuery){
 						dc[action](event);
 						
 						return false;
-					});
+					});/*
 					jQuery('.tablecontainer input[type=text]').unbind('change').bind('change',function(){
 						var $this = jQuery(this),
 							dc = $this.parents('.dcontent-element').data('dcontent');
 						
 						dc.update($this);
-					});
+					});*/
+					jQuery('.tablecontainer input[type=text]').tinymce(actions.table._tinymce_settings);
 				},
 				_get : function(element){
 					var elementContainer = jQuery(element),
 						elementId = (elementContainer.attr('id')).replace(/\-element$/,'');
 					
 					var tablevalue = '<div id="'+elementId+'"><table>';
-					var tableelement = elementContainer.find('> table').clone(true);
+					var tableelement = elementContainer.find('> div > table').clone(true);
 	
 					var TRs = tableelement.children().children();
 					for(var i=0; i<TRs.size()-1; i++){

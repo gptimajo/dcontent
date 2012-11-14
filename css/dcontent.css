@@ -45,11 +45,12 @@
 .dcontent-element .list-control.add-sub-item-list { background-position:0 -16px; }
 .dcontent-element .list-control.add-sub-item-list.remove { display:none; background-position:-16px -16px; }
 
-.dcontent-element .tablecontainer { padding-left:5px; padding-right:5px; }
+.dcontent-element .tablecontainer { padding-left:5px; padding-right:5px; overflow:auto; }
 .dcontent-element .tablecontainer:before { content:'TABLE';}
-.dcontent-element .tablecontainer table { width:100%; }
-.dcontent-element .tablecontainer td { border:dotted 1px #999; min-height:30px; position:relative; width:auto; min-width:30%; }
-.dcontent-element .tablecontainer td input { border:none !important; padding:0 !important; margin:0 !important; display:inline-block !important; width:100% !important; height:100% !important; min-height:30px !important; font-family:Verdana,Arial,Helvetica,sans-serif !important; font-size:10px !important; }
+.dcontent-element .tablecontainer > div:first-child { width:100%; height:auto; overflow:auto; position:relative; }
+.dcontent-element .tablecontainer table { width:95%; }
+.dcontent-element .tablecontainer td { min-height:32px; position:relative; width:auto; min-width:30%; }
+.dcontent-element .tablecontainer td input { border:none !important; padding:0 !important; margin:0 !important; display:inline-block; width:100% !important; height:100% !important; min-height:30px !important; font-family:Verdana,Arial,Helvetica,sans-serif !important; font-size:10px !important; }
 .dcontent-element .tablecontainer table tr td:last-child { border:none; width:35px !important; text-align:center; white-space:nowrap; }
 .dcontent-element .tablecontainer table tr:last-child td { border:none; vertical-align:top; }
 .dcontent-element .tablecontainer table tr:first-child td:last-child .remove-row-table { display:none; }
