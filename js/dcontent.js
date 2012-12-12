@@ -59,6 +59,7 @@ if(jQuery){
 				_tinymce_settings : {
 					script_url : configuration.get('tinymce_path'),
 					width : '100%',
+					height: 300,
 					theme : "advanced",
 					theme_advanced_buttons1 : "bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,link",
 					theme_advanced_buttons2 : "",
